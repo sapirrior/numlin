@@ -12,26 +12,34 @@
   <main>
     <h1>Mathematical Operations</h1>
     
+    <h2>Broadcasting</h2>
+    <p>
+      <code>numlin</code> supports NumPy-style broadcasting. Arithmetic operations between 
+      differently shaped arrays are possible if their dimensions are compatible.
+    </p>
+    <ul>
+      <li><strong>Matrix-Vector</strong>: Matrix <code>(M, N)</code> op Vector <code>(N)</code> applies the vector to every row.</li>
+      <li><strong>Column-wise</strong>: Matrix <code>(M, N)</code> op Matrix <code>(M, 1)</code> applies the column to every row.</li>
+    </ul>
+
+    <h2>Logic & Comparisons</h2>
+    <p>Comparison methods return a new array with <code>uint8</code> DType containing 1 (true) or 0 (false).</p>
+    <ul>
+      <li><code>.greater(scalar)</code></li>
+      <li><code>.less(scalar)</code></li>
+      <li><code>.equal(scalar)</code></li>
+    </ul>
+
+    <h2>Clipping</h2>
+    <p>Restrict values to a specific range <code>[min, max]</code>.</p>
+    <ul>
+      <li><code>.clip(min, max)</code>: Returns a new array.</li>
+      <li><code>.clip_(min, max)</code>: In-place operation.</li>
+    </ul>
+
     <h2>Universal Functions (uFuncs)</h2>
-    <p>Unary operations that operate element-wise on both Vectors and Matrices.</p>
     <ul>
-      <li><code>nl.sqrt(arr)</code>: Square root.</li>
-      <li><code>nl.exp(arr)</code>: Exponential.</li>
-      <li><code>nl.log(arr)</code>: Natural logarithm.</li>
-    </ul>
-
-    <h2>Statistics</h2>
-    <p>Available under the <code>nl.statistics</code> namespace.</p>
-    <ul>
-      <li><code>sum(arr)</code>: Total sum of elements, optimized with ILP.</li>
-      <li><code>mean(arr)</code>: Arithmetic mean.</li>
-    </ul>
-
-    <h2>Random</h2>
-    <p>Available under the <code>nl.random</code> namespace.</p>
-    <ul>
-      <li><code>vector(length, dtype?)</code>: Vector of uniform random values [0, 1).</li>
-      <li><code>matrix(rows, cols, dtype?)</code>: Matrix of uniform random values [0, 1).</li>
+      <li><code>nl.sqrt(arr)</code>, <code>nl.exp(arr)</code>, <code>nl.log(arr)</code></li>
     </ul>
 
     <footer>

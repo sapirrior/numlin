@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Statistics | numlin Documentation</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="main.js"></script>
+</head>
+<body>
+  <aside id="sidebar-nav"></aside>
+  <main>
+    <h1>Statistics</h1>
+    <p>
+      The <code>nl.statistics</code> namespace provides numerically stable 
+      functions for data analysis.
+    </p>
+
+    <h2>Basic Reductions</h2>
+    <ul>
+      <li><code>sum(arr)</code>: Total sum of elements. Uses 4-way independent accumulators.</li>
+      <li><code>mean(arr)</code>: Arithmetic mean.</li>
+    </ul>
+
+    <h2>Numerical Stability</h2>
+    <h3><code>variance(arr)</code> and <code>std(arr)</code></h3>
+    <p>
+      Calculates variance and standard deviation using <strong>Welford's Online Algorithm</strong>. 
+      This approach is numerically stable and prevents precision loss (catastrophic cancellation) 
+      encountered in the naive "sum of squares" method.
+    </p>
+
+    <h2>Extrema</h2>
+    <ul>
+      <li><code>min(arr)</code>: Returns the minimum value. Returns <code>NaN</code> for empty arrays.</li>
+      <li><code>max(arr)</code>: Returns the maximum value. Returns <code>NaN</code> for empty arrays.</li>
+      <li><code>argmin(arr)</code>: Returns the index of the minimum value. Returns <code>-1</code> for empty arrays.</li>
+      <li><code>argmax(arr)</code>: Returns the index of the maximum value. Returns <code>-1</code> for empty arrays.</li>
+    </ul>
+
+    <footer>
+      <p>&copy; 2026 sapirrior. Released under the MIT License.</p>
+    </footer>
+  </main>
+</body>
+</html>

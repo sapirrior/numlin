@@ -14,11 +14,21 @@
     <p>The <code>Matrix</code> class represents 2-dimensional numerical data.</p>
 
     <h2>Operations</h2>
-    <h3><code>.dot(other)</code></h3>
-    <p>Performs matrix multiplication (dot product).</p>
+    <ul>
+      <li><code>.dot(other)</code>: Matrix multiplication.</li>
+      <li><code>.transpose()</code>: Matrix transpose.</li>
+      <li><code>.add(other)</code>, <code>.subtract(other)</code>, <code>.multiply(other)</code> (Supports Broadcasting)</li>
+    </ul>
 
-    <h3><code>.transpose()</code></h3>
-    <p>Returns a new Matrix representing the transpose of the original.</p>
+    <h2>Data Integrity & Extraction</h2>
+    <h3><code>.copy()</code></h3>
+    <p>Creates a deep copy of the matrix and its underlying buffer.</p>
+
+    <h3><code>.slice(rowStart, rowEnd?)</code></h3>
+    <p>
+      Returns a new <code>Matrix</code> containing the specified rows. 
+      Supports negative indexing and out-of-bounds clamping.
+    </p>
 
     <h2>Manipulation</h2>
     <h3><code>.flatten()</code></h3>

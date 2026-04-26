@@ -4,7 +4,7 @@ import { statistics } from './api/statistics.js';
 import { random } from './api/random.js';
 import { creation } from './api/creation.js';
 import { DType, TypedArray, getTypedArrayConstructor } from './core/dtype.js';
-import { vectorSqrt, vectorExp, vectorLog } from './kernels/math.js';
+import { vectorSqrt, vectorExp, vectorLog } from './kernels/unary.js';
 
 const nl = {
   // Creation

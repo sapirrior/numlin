@@ -1,82 +1,67 @@
 # numlin
 
 [![npm version](https://img.shields.io/npm/v/numlin.svg)](https://www.npmjs.com/package/numlin)
-[![npm downloads](https://img.shields.io/npm/dm/numlin.svg)](https://www.npmjs.com/package/numlin)
-[![license](https://img.shields.io/npm/l/numlin.svg)](https://github.com/sapirrior/numlin/blob/main/LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Downloads](https://img.shields.io/npm/dm/numlin.svg)](https://www.npmjs.com/package/numlin)
 
-Numerical computing library for TypeScript and Node.js.
+**numlin** is a zero-dependency numerical computing library for TypeScript and Node.js. It implements kernels designed for the V8 JavaScript engine.
 
-## Overview
+## 🚀 Key Features
 
-`numlin` is a numerical library implemented in TypeScript. It provides a set of tools for vector and matrix operations, statistics, and mathematical utilities optimized for JIT execution environments. By utilizing JavaScript `TypedArrays`, `numlin` provides low-latency operations and predictable memory overhead.
+- **Kernels**: Loops with 4x unrolling and Instruction Level Parallelism (ILP).
+- **Universal Broadcasting**: NumPy-style broadcasting for arithmetic between vectors and matrices.
+- **Stable Statistics**: Implementation of Welford's Online Algorithm for variance and std dev.
+- **Memory Management**: In-place operations (e.g., `add_`) and zero-copy views (`reshape`, `flatten`).
+- **Logic & Clipping**: Comparison masks and value range restriction.
+- **Slicing**: Boundary-clamped, negative-index-supporting slicing for vectors and matrices.
+- **Type System**: DType promotion (float64, int32, uint32, uint8) for mathematical consistency.
 
-## Features
-
-- **Optimized Kernels**: Kernels use loop unrolling and instruction-level parallelism to improve CPU throughput.
-- **Memory Management**: Uses a decoupled `DataBuffer` architecture for zero-copy views, reshapes, and flattens.
-- **DType Support**: Supports `float64`, `float32`, `int32`, `uint32`, and `uint8` with automatic type promotion.
-- **Zero Dependencies**: Pure TypeScript implementation with no external runtime dependencies.
-- **ES Modules**: Supports ES Modules and standard Node.js integration.
-
-## Installation
+## 📦 Installation
 
 ```bash
 npm install numlin
 ```
 
-## Usage
+## 🛠 Usage
 
-`numlin` supports both ES Modules and CommonJS.
-
-### ES Modules (recommended)
-```typescript
+### Basic Operations
+```javascript
 import nl from 'numlin';
 
-const v = nl.vector([1, 2, 3]);
+const a = nl.vector([1, 2, 3]);
+const b = nl.vector([4, 5, 6]);
+
+// Standard addition
+const c = a.add(b);
+
+// In-place addition
+a.add_(b);
 ```
 
-### CommonJS
+### Broadcasting
 ```javascript
-const { nl } = require('numlin');
+const matrix = nl.matrix([
+  [1, 2],
+  [3, 4]
+]);
+const bias = nl.vector([10, 20]);
 
-const v = nl.vector([1, 2, 3]);
+// Adds 'bias' to every row of the matrix
+const result = matrix.add(bias);
 ```
 
-## API Reference
-
-### Creation
-- `nl.vector(data, dtype?)`: Create a 1D array.
-- `nl.matrix(data, shape?, dtype?)`: Create a 2D array.
-- `nl.zeros(shape, dtype?)`: Initialize with zeros.
-- `nl.ones(shape, dtype?)`: Initialize with ones.
-- `nl.arange(start, stop?, step?)`: Create a range of values.
-- `nl.linspace(start, stop, num)`: Create linearly spaced values.
-
-### Mathematics
-- `nl.sqrt(x)`, `nl.exp(x)`, `nl.log(x)`: Unary mathematical operations.
-- `nl.statistics.sum(x)`: Total sum.
-- `nl.statistics.mean(x)`: Arithmetic mean.
-
-### Randomization
-- `nl.random.vector(length, dtype?)`: Random vector generation.
-- `nl.random.matrix(rows, cols, dtype?)`: Random matrix generation.
-
-## Performance
-
-`numlin` is designed for performance. Kernels avoid object creation and array methods (like `.map` or `.reduce`) in hot paths to facilitate JIT optimization.
-
-To run benchmarks:
-```bash
-npm run benchmark
+### Statistics
+```javascript
+const v = nl.random.vector(1000000);
+const mean = nl.statistics.mean(v);
+const std = nl.statistics.std(v);
+const max = nl.statistics.max(v);
 ```
 
-## Testing
+## 📖 Documentation
 
-Verified with a test suite covering edge cases, type promotion, and memory integrity:
-```bash
-npm test
-```
+Full documentation is available in the `docs/` directory or on [GitHub Pages](https://sapirrior.github.io/numlin/).
 
-## License
+## ⚖️ License
 
-MIT
+MIT © 2026 sapirrior

@@ -1,7 +1,7 @@
 {
   "name": "numlin",
-  "version": "1.0.0",
-  "description": "Numerical computing library for TypeScript. Optimized vector and matrix operations, linear algebra, and statistics with zero dependencies.",
+  "version": "2.0.0",
+  "description": "Numerical computing library for TypeScript. Vector and matrix operations, linear algebra, and statistics with zero dependencies.",
   "main": "./dist/cjs/numlin.js",
   "module": "./dist/mjs/numlin.js",
   "types": "./dist/types/numlin.d.ts",

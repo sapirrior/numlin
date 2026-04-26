@@ -12,23 +12,24 @@
   <main>
     <h1>Introduction</h1>
     <p>
-      <code>numlin</code> is a high-performance numerical computing library implemented in TypeScript. 
-      It provides optimized primitives for vector and matrix operations, linear algebra, and 
-      statistics, specifically engineered for Just-In-Time (JIT) execution environments like Node.js.
+      <code>numlin</code> is a numerical computing library implemented in pure TypeScript. 
+      It provides primitives for vector and matrix operations designed for 
+      Just-In-Time (JIT) execution environments like Node.js.
     </p>
 
-    <h2>Objective</h2>
+    <h2>Functionality</h2>
     <p>
-      The primary goal of <code>numlin</code> is to provide a lightweight, zero-dependency alternative 
-      to heavyweight numerical libraries, offering professional-grade performance through 
-      mechanical sympathy with the V8 engine.
+      The library includes support for 
+      <strong>Universal Broadcasting</strong>, <strong>Logical Masks</strong>, and 
+      <strong>Numerically Stable Statistics</strong>.
     </p>
 
     <h2>Key Characteristics</h2>
     <ul>
-      <li><strong>Mechanical Sympathy</strong>: Optimized kernels utilizing loop unrolling and instruction-level parallelism.</li>
-      <li><strong>Efficient Memory Model</strong>: Decoupled DataBuffer architecture allowing for zero-copy views.</li>
-      <li><strong>Predictable Performance</strong>: Minimal object allocation in hot paths to avoid garbage collection overhead.</li>
+      <li><strong>Mechanical Sympathy</strong>: Kernels utilizing loop unrolling and instruction-level parallelism.</li>
+      <li><strong>In-Place Operations</strong>: Supports <code>_</code> suffixed methods (e.g., <code>add_</code>) to reduce heap allocations.</li>
+      <li><strong>DType Consistency</strong>: Type promotion ensuring mathematical correctness across <code>float64</code>, <code>int32</code>, and <code>uint8</code>.</li>
+      <li><strong>Memory Model</strong>: Manipulation methods like <code>reshape</code> and <code>flatten</code> share the underlying memory buffer.</li>
     </ul>
 
     <footer>

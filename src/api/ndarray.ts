@@ -1,5 +1,5 @@
 import { DataBuffer } from '../core/memory.js';
-import { DType, TypedArray } from '../core/dtype.js';
+import { DType, TypedArray, getTypedArrayConstructor } from '../core/dtype.js';
 import { Shape } from '../core/shape.js';
 
 export abstract class NDArray {
@@ -27,5 +27,17 @@ export abstract class NDArray {
 
   toArray(): number[] {
     return Array.from(this.data);
+  }
+
+  /**
+   * Creates a deep copy of the array and its data.
+   */
+  abstract copy(): NDArray;
+
+  protected _cloneBuffer(): TypedArray {
+    const Constructor = getTypedArrayConstructor(this.dtype);
+    const newBuffer = new Constructor(this.length);
+    newBuffer.set(this.data);
+    return newBuffer;
   }
 }

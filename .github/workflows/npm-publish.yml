@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      id-token: write # Required for provenance
+      id-token: write
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -26,22 +26,16 @@ jobs:
       - name: Install Dependencies
         run: npm install --no-audit --no-fund
 
-      - name: Run Quality Checks (Tests)
+      - name: Run Tests
         run: npm test
-        # This ensures we NEVER publish a broken build. 
-        # The workflow will stop here if any test fails.
 
       - name: Build Library
         run: npm run build
-        # We build fresh from source to ensure dist/ is perfectly synced.
 
       - name: Verify Package Contents
         run: npm pack --dry-run
-        # Final "wise check" to see what files will be included in the tarball.
 
       - name: Publish to npm
         run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        # --provenance adds a cryptographic link between the npm package and this GitHub Action.
-        # This uses the NPM_TOKEN secret you configured in your repository settings.

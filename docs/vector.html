@@ -13,23 +13,23 @@
     <h1>Vector Class</h1>
     <p>The <code>Vector</code> class represents 1-dimensional numerical data.</p>
 
-    <h2>Arithmetic</h2>
+    <h2>Operations</h2>
     <ul>
-      <li><code>.add(other)</code>: Element-wise addition.</li>
-      <li><code>.subtract(other)</code>: Element-wise subtraction.</li>
-      <li><code>.multiply(other)</code>: Element-wise multiplication.</li>
+      <li><code>.add(other)</code>, <code>.subtract(other)</code>, <code>.multiply(other)</code></li>
+      <li><code>.add_(other)</code>, <code>.subtract_(other)</code>, <code>.multiply_(other)</code> (In-place)</li>
+      <li><code>.dot(other)</code>: Vector dot product.</li>
     </ul>
 
-    <h2>Linear Algebra</h2>
-    <h3><code>.dot(other)</code></h3>
-    <p>Calculates the dot product of two vectors. Returns a scalar value.</p>
+    <h2>Data Integrity & Extraction</h2>
+    <h3><code>.copy()</code></h3>
+    <p>Creates a deep copy of the vector and its underlying buffer.</p>
+
+    <h3><code>.slice(start, end?)</code></h3>
+    <p>Returns a new <code>Vector</code> containing a subset of the data. Follows standard JS slice semantics.</p>
 
     <h2>Manipulation</h2>
     <h3><code>.reshape(rows, cols)</code></h3>
-    <p>
-      Returns a <code>Matrix</code> view of the vector data. This is a <strong>zero-copy</strong> 
-      operation; the underlying data buffer is shared.
-    </p>
+    <p>Converts the vector into a <code>Matrix</code>. Zero-copy operation.</p>
 
     <footer>
       <p>&copy; 2026 sapirrior. Released under the MIT License.</p>

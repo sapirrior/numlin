@@ -1,47 +1,49 @@
 # Contributing to numlin
 
-Thank you for your interest in contributing to `numlin`. To maintain the performance and integrity of the library, we adhere to strict technical standards.
+This document outlines the technical and professional standards required for contributions to `numlin`. Adherence to these guidelines ensures the library remains predictable, maintainable, and aligned with its design for the target environment.
+
+## Professional Standards
+
+### 1. Communication & Documentation
+- **Formal Tone**: Use formal, technical language in all documentation, commit messages, and pull request descriptions.
+- **Simplicity**: Write clearly and concisely. Avoid conversational filler, marketing language, or subjective claims.
+- **No Hyperbole**: Do not use hyperbolic or superlative language such as "best", "high-performance", "very fast", "extremely", "powerful", "advanced", or "optimized". Use objective, technical descriptions of the library's implementation and behavior instead.
+- **No Emojis or Symbols**: Do not use emojis, icons, or decorative symbols in source code, comments, or documentation files. Use only standard alphanumeric characters and standard technical punctuation.
+
+### 2. Implementation Integrity
+- **No Experimentation**: PRs must not contain experimental features, unproven algorithms, or unvetted syntax. Implement only proven or stable implementations.
+- **Architectural Consistency**: New code must match the existing patterns for memory management (DataBuffer), kernel design, and API structure.
 
 ## Technical Standards
 
-### Kernel Development Rules
-`numlin` kernels are designed for maximum JIT efficiency. When contributing to `src/kernels/`, you must follow these rules:
-1. **Classic Loops Only**: Use standard `for` loops. Do not use `.map()`, `.reduce()`, `.forEach()`, or other high-level array methods.
-2. **Loop Unrolling**: Unroll critical loops by a factor of 4 where applicable.
-3. **No Object Allocation**: Avoid creating objects, arrays, or closures inside hot paths (loops).
-4. **TypedArray Usage**: Operations must be performed directly on `TypedArrays`.
-5. **Instruction-Level Parallelism**: For reduction operations (sum, mean, dot), use multiple independent accumulators to bypass data dependencies.
+### Kernel Development
+Kernels in `src/kernels/` must be designed for V8 JIT execution:
+1. **Low-Level Loops**: Use only standard `for` loops. High-level array methods (`map`, `filter`, `forEach`) are prohibited in kernels.
+2. **Loop Unrolling**: Apply a 4x unrolling factor to critical paths.
+3. **Zero Allocation**: Do not allocate objects, arrays, or closures within loops.
+4. **Instruction-Level Parallelism (ILP)**: Utilize multiple independent accumulators for reductions.
 
-### DType Integrity
-Ensure that all new operations support the full range of `DTypes` (`float64`, `float32`, `int32`, `uint32`, `uint8`) and follow the established type promotion rules.
-
-## Development Workflow
-
-### Environment Setup
-- Ensure Node.js (v20+) is installed.
-- Install dependencies: `npm install`.
-
-### Testing
-We use the native Node.js test runner. All new features or bug fixes must include tests in the `tests/` directory.
-- Run tests: `npm test`
-- Note: Sequential execution (`--test-concurrency=1`) is required to ensure memory stability during tests.
-
-### Benchmarking
-Performance is a core requirement. If you add or modify a kernel, you must update or add a benchmark in `benchmarks/` and verify that there are no regressions.
-- Run benchmarks: `npm run benchmark`
+### Data Types & Memory
+- Operations must support all registered `DTypes`.
+- Adhere to the established type promotion table.
+- Maintain the decoupled memory model; use zero-copy views (e.g., `reshape`) where possible.
 
 ## Pull Request Process
 
-1. **Research**: Open an issue to discuss significant changes before implementation.
-2. **Implementation**: Ensure your code follows the technical standards above.
-3. **Validation**: Run the full test suite and benchmarks.
-4. **Documentation**: Update `README.md` or the `docs/` folder if you are adding new API features.
-5. **Submission**: Submit your PR with a clear description of the change and performance impact data (if applicable).
+1. **Inquiry**: Before implementing significant changes, open an issue for architectural review.
+2. **Strict Validation**: 
+   - Every feature must include automated tests in `tests/`.
+   - Run tests sequentially: `npm test`.
+   - All tests must pass with zero warnings or type errors.
+3. **Performance Verification**:
+   - If a kernel is modified, you must provide benchmark results demonstrating no regression.
+   - Run benchmarks: `npm run benchmark`.
+4. **Final Review**: Ensure all hardcoded versions or version-specific features are removed. Documentation must be updated and follow the professional standards listed above.
 
 ## Code Style
-- Use TypeScript for all source files.
-- Maintain consistent naming conventions (e.g., full words like `vector` instead of `vec`).
-- Ensure full type safety; avoid `any`.
+- **TypeScript**: Use strict TypeScript; `any` is prohibited.
+- **Naming**: Use descriptive, full-word identifiers (e.g., `iterator`, `index`, `result`).
+- **Formatting**: Adhere to the project's `.editorconfig` and existing indentation patterns.
 
 ---
 By contributing to `numlin`, you agree that your contributions will be licensed under the MIT License.

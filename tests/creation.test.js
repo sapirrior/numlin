@@ -22,6 +22,24 @@ describe('Creation & DTypes', () => {
   });
 });
 
+describe('DType Promotion Safety', () => {
+  test('Signed + Unsigned Mixed (int32 + uint32)', () => {
+    const v_signed = nl.vector([-10], 'int32');
+    const v_unsigned = nl.vector([20], 'uint32');
+    const res = v_signed.add(v_unsigned);
+    assert.strictEqual(res.dtype, 'float64');
+    assert.strictEqual(res.data[0], 10);
+  });
+
+  test('Small Int + Large Float (uint8 + float64)', () => {
+    const v1 = nl.vector([1], 'uint8');
+    const v2 = nl.vector([1.5], 'float64');
+    const res = v1.add(v2);
+    assert.strictEqual(res.dtype, 'float64');
+    assert.strictEqual(res.data[0], 2.5);
+  });
+});
+
 describe('Creation Utilities', () => {
   test('nl.zeros', () => {
     assert.deepStrictEqual(Array.from(nl.zeros(3).toArray()), [0, 0, 0]);
