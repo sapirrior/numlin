@@ -1,5 +1,9 @@
 # numlin
 
+[![npm version](https://img.shields.io/npm/v/numlin.svg)](https://www.npmjs.com/package/numlin)
+[![npm downloads](https://img.shields.io/npm/dm/numlin.svg)](https://www.npmjs.com/package/numlin)
+[![license](https://img.shields.io/npm/l/numlin.svg)](https://github.com/sapirrior/numlin/blob/main/LICENSE)
+
 Numerical computing library for TypeScript and Node.js.
 
 ## Overview
