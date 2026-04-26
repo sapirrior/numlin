@@ -1,0 +1,68 @@
+{
+  "name": "numlin",
+  "version": "1.0.0",
+  "description": "Numerical computing library for TypeScript. Optimized vector and matrix operations, linear algebra, and statistics with zero dependencies.",
+  "main": "./dist/cjs/numlin.js",
+  "module": "./dist/mjs/numlin.js",
+  "types": "./dist/types/numlin.d.ts",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/mjs/numlin.js",
+      "require": "./dist/cjs/numlin.js",
+      "types": "./dist/types/numlin.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "npm run clean && npm run build:lib && npm run build:benchmarks",
+    "build:lib": "npm run build:cjs && npm run build:mjs && npm run build:types",
+    "build:cjs": "node node_modules/typescript/lib/tsc.js -p config/tsconfig.cjs.json && echo '{\"type\": \"commonjs\"}' > dist/cjs/package.json",
+    "build:mjs": "node node_modules/typescript/lib/tsc.js -p config/tsconfig.mjs.json",
+    "build:types": "node node_modules/typescript/lib/tsc.js -p config/tsconfig.types.json",
+    "build:benchmarks": "node node_modules/typescript/lib/tsc.js -p config/tsconfig.benchmarks.json",
+    "test": "npm run build:mjs && node --test --test-concurrency=1 tests/*.test.js",
+    "benchmark": "npm run build:benchmarks && node dist/benchmarks/benchmarks/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sapirrior/numlin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sapirrior/numlin/issues"
+  },
+  "homepage": "https://github.com/sapirrior/numlin#readme",
+  "keywords": [
+    "numerical-computing",
+    "linear-algebra",
+    "matrix-math",
+    "vector-operations",
+    "ndarray",
+    "typescript-library",
+    "performance",
+    "jit-optimized",
+    "math-library",
+    "data-science",
+    "statistics",
+    "typedarray",
+    "scientific-computing",
+    "mathematics",
+    "tensor",
+    "optimization",
+    "machine-learning",
+    "signal-processing",
+    "algebra",
+    "array-programming"
+  ],
+  "author": "sapirrior",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "@types/node": "^20.0.0"
+  }
+}
