@@ -6,23 +6,23 @@
 
 **numlin** is a zero-dependency numerical computing library for TypeScript and Node.js. It implements kernels designed for the V8 JavaScript engine.
 
-## 🚀 Key Features
+## Key Features
 
 - **Kernels**: Loops with 4x unrolling and Instruction Level Parallelism (ILP).
 - **Universal Broadcasting**: NumPy-style broadcasting for arithmetic between vectors and matrices.
 - **Stable Statistics**: Implementation of Welford's Online Algorithm for variance and std dev.
 - **Memory Management**: In-place operations (e.g., `add_`) and zero-copy views (`reshape`, `flatten`).
 - **Logic & Clipping**: Comparison masks and value range restriction.
-- **Slicing**: Boundary-clamped, negative-index-supporting slicing for vectors and matrices.
+- **Robust Slicing**: Boundary-clamped, negative-index-supporting slicing for vectors and matrices.
 - **Type System**: DType promotion (float64, int32, uint32, uint8) for mathematical consistency.
 
-## 📦 Installation
+## Installation
 
 ```bash
 npm install numlin
 ```
 
-## 🛠 Usage
+## Usage
 
 ### Basic Operations
 ```javascript
@@ -58,10 +58,10 @@ const std = nl.statistics.std(v);
 const max = nl.statistics.max(v);
 ```
 
-## 📖 Documentation
+## Documentation
 
 Full documentation is available in the `docs/` directory or on [GitHub Pages](https://sapirrior.github.io/numlin/).
 
-## ⚖️ License
+## License
 
 MIT © 2026 sapirrior
