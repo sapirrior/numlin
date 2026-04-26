@@ -1,8 +1,17 @@
 # numlin
 
-[![npm version](https://img.shields.io/npm/v/numlin.svg)](https://www.npmjs.com/package/numlin)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Downloads](https://img.shields.io/npm/dm/numlin.svg)](https://www.npmjs.com/package/numlin)
+  <a href="https://www.npmjs.com/package/numlin">
+    <img src="https://img.shields.io/npm/v/numlin?style=flat-square&logo=npm&color=2e86de&labelColor=333" alt="npm version" height="20">
+  </a>
+  &nbsp;
+  <a href="https://www.npmjs.com/package/numlin">
+    <img src="https://img.shields.io/npm/dt/numlin?style=flat-square&color=e056fd&labelColor=333" alt="downloads" height="20">
+  </a>
+  &nbsp;
+  <a href="https://github.com/sapirrior/numlin/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/sapirrior/numlin?style=flat-square&color=f1c40f&labelColor=333" alt="license" height="20">
+  </a>
+</p>
 
 **numlin** is a zero-dependency numerical computing library for TypeScript and Node.js. It implements kernels designed for the V8 JavaScript engine.
 
