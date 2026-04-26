@@ -5,167 +5,122 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>numlin - Documentation</title>
   <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/marked/marked.min.js"></script>
 </head>
 <body>
-  <aside>
-    <div class="nav-group">
-      <h4>Introduction</h4>
-      <a href="#getting-started" class="nav-link">Getting Started</a>
-      <a href="#installation" class="nav-link">Installation</a>
-      <a href="#core-concepts" class="nav-link">Core Concepts</a>
-    </div>
-    <div class="nav-group">
-      <h4>Creation API</h4>
-      <a href="#creation-basic" class="nav-link">Basic Arrays</a>
-      <a href="#creation-utils" class="nav-link">Utilities</a>
-    </div>
-    <div class="nav-group">
-      <h4>Data Structures</h4>
-      <a href="#vector" class="nav-link">Vector</a>
-      <a href="#matrix" class="nav-link">Matrix</a>
-    </div>
-    <div class="nav-group">
-      <h4>Operations</h4>
-      <a href="#math" class="nav-link">Mathematics</a>
-      <a href="#statistics" class="nav-link">Statistics</a>
-      <a href="#random" class="nav-link">Random</a>
-    </div>
-  </aside>
+  <div id="root"></div>
 
-  <main>
-    <header>
-      <h1>numlin</h1>
-      <p>A numerical computing library for TypeScript and Node.js.</p>
-    </header>
+  <script type="text/babel">
+    const { useState, useEffect } = React;
 
-    <section id="getting-started">
-      <h2>Getting Started</h2>
-      <p>
-        <code>numlin</code> is designed for high-performance numerical operations. 
-        It utilizes JavaScript <code>TypedArrays</code> and JIT-optimized kernels to 
-        provide a robust engine for linear algebra and data science.
-      </p>
+    const Sidebar = ({ currentPage, onPageChange, theme, toggleTheme }) => {
+      const menu = [
+        { id: 'introduction', label: 'Introduction' },
+        { id: 'installation', label: 'Installation' },
+        { id: 'creation', label: 'Creation API' },
+        { id: 'vector', label: 'Vector Class' },
+        { id: 'matrix', label: 'Matrix Class' },
+        { id: 'operations', label: 'Operations' }
+      ];
 
-      <div id="installation">
-        <h3>Installation</h3>
-        <pre><code>npm install numlin</code></pre>
-      </div>
+      return (
+        <aside>
+          <div className="nav-group">
+            <h4>Documentation</h4>
+            {menu.map(item => (
+              <a 
+                key={item.id}
+                href={`#${item.id}`}
+                className={`nav-link ${currentPage === item.id ? 'active' : ''}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  onPageChange(item.id);
+                  window.location.hash = item.id;
+                }}
+              >
+                {item.label}
+              </a>
+            ))}
+          </div>
 
-      <div id="core-concepts">
-        <h3>Core Concepts</h3>
-        <p>
-          The library centers around the <code>nl</code> object. Most operations are 
-          available as methods on <code>Vector</code> or <code>Matrix</code> instances 
-          or as static utilities on the <code>nl</code> object.
-        </p>
-      </div>
-    </section>
+          <div className="theme-toggle" onClick={toggleTheme}>
+            <span>{theme === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode'}</span>
+          </div>
+        </aside>
+      );
+    };
 
-    <section id="creation-api">
-      <h2>Creation API</h2>
-      
-      <div class="api-card" id="creation-basic">
-        <h3>nl.vector(data, dtype?)</h3>
-        <p>Creates a 1D Vector.</p>
-        <pre><code>const v = nl.vector([1, 2, 3]);</code></pre>
-      </div>
+    const App = () => {
+      const [page, setPage] = useState('introduction');
+      const [content, setContent] = useState('');
+      const [loading, setLoading] = useState(true);
+      const [theme, setTheme] = useState(() => {
+        const saved = localStorage.getItem('theme');
+        if (saved) return saved;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      });
 
-      <div class="api-card">
-        <h3>nl.matrix(data, shape?, dtype?)</h3>
-        <p>Creates a 2D Matrix. If data is flat, <code>shape</code> is required.</p>
-        <pre><code>const m = nl.matrix([[1, 2], [3, 4]]);
-const m2 = nl.matrix([1, 2, 3, 4], [2, 2]);</code></pre>
-      </div>
+      useEffect(() => {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+      }, [theme]);
 
-      <div class="api-card" id="creation-utils">
-        <h3>Utilities</h3>
-        <ul>
-          <li><code>nl.zeros(shape, dtype?)</code>: Array filled with zeros.</li>
-          <li><code>nl.ones(shape, dtype?)</code>: Array filled with ones.</li>
-          <li><code>nl.eye(n, m?, dtype?)</code>: Identity matrix.</li>
-          <li><code>nl.arange(start, stop?, step?)</code>: Range of values.</li>
-          <li><code>nl.linspace(start, stop, num)</code>: Evenly spaced values.</li>
-        </ul>
-      </div>
-    </section>
+      const toggleTheme = () => {
+        setTheme(prev => prev === 'light' ? 'dark' : 'light');
+      };
 
-    <section id="vector">
-      <h2>Vector Class</h2>
-      <p>Inherits from <code>NDArray</code>. Represents 1D data.</p>
-      
-      <div class="api-card">
-        <h3>.add(other) / .subtract(other) / .multiply(other)</h3>
-        <p>Performs element-wise operations with another Vector or a scalar.</p>
-      </div>
+      useEffect(() => {
+        const handleHash = () => {
+          const hash = window.location.hash.replace('#', '');
+          if (hash) setPage(hash);
+        };
+        handleHash();
+        window.addEventListener('hashchange', handleHash);
+        return () => window.removeEventListener('hashchange', handleHash);
+      }, []);
 
-      <div class="api-card">
-        <h3>.dot(other) <span class="badge">Returns Number</span></h3>
-        <p>Calculates the dot product of two vectors.</p>
-      </div>
+      useEffect(() => {
+        setLoading(true);
+        fetch(`./pages/${page}.md`)
+          .then(res => res.text())
+          .then(text => {
+            setContent(marked.parse(text));
+            setLoading(false);
+          })
+          .catch(err => {
+            setContent('<h1>Error</h1><p>Failed to load documentation page.</p>');
+            setLoading(false);
+          });
+      }, [page]);
 
-      <div class="api-card">
-        <h3>.reshape(rows, cols) <span class="badge">Zero Copy</span></h3>
-        <p>Returns a Matrix view of the vector data without copying.</p>
-      </div>
-    </section>
+      return (
+        <div className="app-container">
+          <Sidebar 
+            currentPage={page} 
+            onPageChange={setPage} 
+            theme={theme} 
+            toggleTheme={toggleTheme} 
+          />
+          <main>
+            {loading ? (
+              <div className="loading">Loading...</div>
+            ) : (
+              <div dangerouslySetInnerHTML={{ __html: content }} />
+            )}
+            <footer>
+              <p>&copy; 2026 sapirrior. Released under the MIT License.</p>
+              <p>Repository: <a href="https://github.com/sapirrior/numlin">github.com/sapirrior/numlin</a></p>
+            </footer>
+          </main>
+        </div>
+      );
+    };
 
-    <section id="matrix">
-      <h2>Matrix Class</h2>
-      <p>Inherits from <code>NDArray</code>. Represents 2D data.</p>
-
-      <div class="api-card">
-        <h3>.dot(other)</h3>
-        <p>Performs matrix multiplication (dot product).</p>
-      </div>
-
-      <div class="api-card">
-        <h3>.transpose()</h3>
-        <p>Returns the transposed matrix.</p>
-      </div>
-
-      <div class="api-card">
-        <h3>.flatten() <span class="badge">Zero Copy</span></h3>
-        <p>Returns a Vector view of the matrix data.</p>
-      </div>
-
-      <div class="api-card">
-        <h3>.toArray2D()</h3>
-        <p>Converts the internal flat data back into a 2D JavaScript array.</p>
-      </div>
-    </section>
-
-    <section id="math">
-      <h2>Mathematics</h2>
-      <p>Optimized unary operations that work on both Vectors and Matrices.</p>
-      <ul>
-        <li><code>nl.sqrt(arr)</code></li>
-        <li><code>nl.exp(arr)</code></li>
-        <li><code>nl.log(arr)</code></li>
-      </ul>
-    </section>
-
-    <section id="statistics">
-      <h2>Statistics</h2>
-      <p>Available under the <code>nl.statistics</code> namespace.</p>
-      <ul>
-        <li><code>sum(arr)</code>: Calculates the total sum using ILP.</li>
-        <li><code>mean(arr)</code>: Calculates the arithmetic mean.</li>
-      </ul>
-    </section>
-
-    <section id="random">
-      <h2>Random</h2>
-      <p>Available under the <code>nl.random</code> namespace.</p>
-      <ul>
-        <li><code>vector(length, dtype?)</code>: Uniform random vector [0, 1).</li>
-        <li><code>matrix(rows, cols, dtype?)</code>: Uniform random matrix [0, 1).</li>
-      </ul>
-    </section>
-
-    <footer>
-      <p>&copy; 2026 sapirrior. Released under the MIT License.</p>
-      <p>Repository: <a href="https://github.com/sapirrior/numlin">github.com/sapirrior/numlin</a></p>
-    </footer>
-  </main>
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
 </body>
 </html>

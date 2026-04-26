@@ -22,22 +22,20 @@ npm install numlin
 
 ## Usage
 
+`numlin` supports both ES Modules and CommonJS.
+
+### ES Modules (recommended)
 ```typescript
 import nl from 'numlin';
 
-// Vector Operations
-const v1 = nl.vector([1, 2, 3]);
-const v2 = nl.vector([4, 5, 6]);
-const v3 = v1.add(v2); // [5, 7, 9]
+const v = nl.vector([1, 2, 3]);
+```
 
-// Matrix Operations
-const m1 = nl.matrix([[1, 2], [3, 4]]);
-const m2 = nl.matrix([[5, 6], [7, 8]]);
-const res = m1.dot(m2); // [[19, 22], [43, 50]]
+### CommonJS
+```javascript
+const { nl } = require('numlin');
 
-// Advanced Manipulation
-const reshaped = nl.arange(6).reshape(2, 3);
-const flattened = reshaped.flatten();
+const v = nl.vector([1, 2, 3]);
 ```
 
 ## API Reference
