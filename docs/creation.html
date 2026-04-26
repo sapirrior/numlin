@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creation | numlin Documentation</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="main.js"></script>
+</head>
+<body>
+  <aside id="sidebar-nav"></aside>
+  <main>
+    <h1>Array Creation</h1>
+    <p>Methods for initializing vectors and matrices.</p>
+
+    <h2>Basic Creation</h2>
+    <h3><code>nl.vector(data, dtype?)</code></h3>
+    <p>Creates a 1-dimensional Vector.</p>
+    <pre><code>const v = nl.vector([1, 2, 3]);</code></pre>
+
+    <h3><code>nl.matrix(data, shape?, dtype?)</code></h3>
+    <p>Creates a 2-dimensional Matrix. If data is a flat array, the <code>shape</code> parameter is required.</p>
+    <pre><code>const m = nl.matrix([[1, 2], [3, 4]]);</code></pre>
+
+    <h2>Utility Functions</h2>
+    <ul>
+      <li><code>nl.zeros(shape, dtype?)</code>: Initializes an array with zeros.</li>
+      <li><code>nl.ones(shape, dtype?)</code>: Initializes an array with ones.</li>
+      <li><code>nl.eye(n, m?, dtype?)</code>: Creates an identity matrix.</li>
+      <li><code>nl.arange(start, stop?, step?)</code>: Creates a range of values.</li>
+      <li><code>nl.linspace(start, stop, num)</code>: Creates evenly spaced values over a specified interval.</li>
+    </ul>
+
+    <footer>
+      <p>&copy; 2026 sapirrior. Released under the MIT License.</p>
+    </footer>
+  </main>
+</body>
+</html>

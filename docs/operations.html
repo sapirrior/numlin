@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Operations | numlin Documentation</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="main.js"></script>
+</head>
+<body>
+  <aside id="sidebar-nav"></aside>
+  <main>
+    <h1>Mathematical Operations</h1>
+    
+    <h2>Universal Functions (uFuncs)</h2>
+    <p>Unary operations that operate element-wise on both Vectors and Matrices.</p>
+    <ul>
+      <li><code>nl.sqrt(arr)</code>: Square root.</li>
+      <li><code>nl.exp(arr)</code>: Exponential.</li>
+      <li><code>nl.log(arr)</code>: Natural logarithm.</li>
+    </ul>
+
+    <h2>Statistics</h2>
+    <p>Available under the <code>nl.statistics</code> namespace.</p>
+    <ul>
+      <li><code>sum(arr)</code>: Total sum of elements, optimized with ILP.</li>
+      <li><code>mean(arr)</code>: Arithmetic mean.</li>
+    </ul>
+
+    <h2>Random</h2>
+    <p>Available under the <code>nl.random</code> namespace.</p>
+    <ul>
+      <li><code>vector(length, dtype?)</code>: Vector of uniform random values [0, 1).</li>
+      <li><code>matrix(rows, cols, dtype?)</code>: Matrix of uniform random values [0, 1).</li>
+    </ul>
+
+    <footer>
+      <p>&copy; 2026 sapirrior. Released under the MIT License.</p>
+    </footer>
+  </main>
+</body>
+</html>

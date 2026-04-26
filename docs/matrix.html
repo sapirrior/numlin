@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Matrix Class | numlin Documentation</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="main.js"></script>
+</head>
+<body>
+  <aside id="sidebar-nav"></aside>
+  <main>
+    <h1>Matrix Class</h1>
+    <p>The <code>Matrix</code> class represents 2-dimensional numerical data.</p>
+
+    <h2>Operations</h2>
+    <h3><code>.dot(other)</code></h3>
+    <p>Performs matrix multiplication (dot product).</p>
+
+    <h3><code>.transpose()</code></h3>
+    <p>Returns a new Matrix representing the transpose of the original.</p>
+
+    <h2>Manipulation</h2>
+    <h3><code>.flatten()</code></h3>
+    <p>
+      Returns a <code>Vector</code> representation of the matrix. This is a 
+      <strong>zero-copy</strong> operation.
+    </p>
+
+    <h3><code>.toArray2D()</code></h3>
+    <p>Converts the internal flat TypedArray into a standard JavaScript 2D array.</p>
+
+    <footer>
+      <p>&copy; 2026 sapirrior. Released under the MIT License.</p>
+    </footer>
+  </main>
+</body>
+</html>

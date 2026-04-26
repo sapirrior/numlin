@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vector Class | numlin Documentation</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="main.js"></script>
+</head>
+<body>
+  <aside id="sidebar-nav"></aside>
+  <main>
+    <h1>Vector Class</h1>
+    <p>The <code>Vector</code> class represents 1-dimensional numerical data.</p>
+
+    <h2>Arithmetic</h2>
+    <ul>
+      <li><code>.add(other)</code>: Element-wise addition.</li>
+      <li><code>.subtract(other)</code>: Element-wise subtraction.</li>
+      <li><code>.multiply(other)</code>: Element-wise multiplication.</li>
+    </ul>
+
+    <h2>Linear Algebra</h2>
+    <h3><code>.dot(other)</code></h3>
+    <p>Calculates the dot product of two vectors. Returns a scalar value.</p>
+
+    <h2>Manipulation</h2>
+    <h3><code>.reshape(rows, cols)</code></h3>
+    <p>
+      Returns a <code>Matrix</code> view of the vector data. This is a <strong>zero-copy</strong> 
+      operation; the underlying data buffer is shared.
+    </p>
+
+    <footer>
+      <p>&copy; 2026 sapirrior. Released under the MIT License.</p>
+    </footer>
+  </main>
+</body>
+</html>

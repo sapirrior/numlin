@@ -3,124 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>numlin - Documentation</title>
+  <title>Introduction | numlin Documentation</title>
   <link rel="stylesheet" href="style.css">
-  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <script src="https://unpkg.com/marked/marked.min.js"></script>
+  <script src="main.js"></script>
 </head>
 <body>
-  <div id="root"></div>
+  <aside id="sidebar-nav"></aside>
+  <main>
+    <h1>Introduction</h1>
+    <p>
+      <code>numlin</code> is a high-performance numerical computing library implemented in TypeScript. 
+      It provides optimized primitives for vector and matrix operations, linear algebra, and 
+      statistics, specifically engineered for Just-In-Time (JIT) execution environments like Node.js.
+    </p>
 
-  <script type="text/babel">
-    const { useState, useEffect } = React;
+    <h2>Objective</h2>
+    <p>
+      The primary goal of <code>numlin</code> is to provide a lightweight, zero-dependency alternative 
+      to heavyweight numerical libraries, offering professional-grade performance through 
+      mechanical sympathy with the V8 engine.
+    </p>
 
-    const Sidebar = ({ currentPage, onPageChange, theme, toggleTheme }) => {
-      const menu = [
-        { id: 'introduction', label: 'Introduction' },
-        { id: 'installation', label: 'Installation' },
-        { id: 'creation', label: 'Creation API' },
-        { id: 'vector', label: 'Vector Class' },
-        { id: 'matrix', label: 'Matrix Class' },
-        { id: 'operations', label: 'Operations' }
-      ];
+    <h2>Key Characteristics</h2>
+    <ul>
+      <li><strong>Mechanical Sympathy</strong>: Optimized kernels utilizing loop unrolling and instruction-level parallelism.</li>
+      <li><strong>Efficient Memory Model</strong>: Decoupled DataBuffer architecture allowing for zero-copy views.</li>
+      <li><strong>Predictable Performance</strong>: Minimal object allocation in hot paths to avoid garbage collection overhead.</li>
+    </ul>
 
-      return (
-        <aside>
-          <div className="nav-group">
-            <h4>Documentation</h4>
-            {menu.map(item => (
-              <a 
-                key={item.id}
-                href={`#${item.id}`}
-                className={`nav-link ${currentPage === item.id ? 'active' : ''}`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  onPageChange(item.id);
-                  window.location.hash = item.id;
-                }}
-              >
-                {item.label}
-              </a>
-            ))}
-          </div>
-
-          <div className="theme-toggle" onClick={toggleTheme}>
-            <span>{theme === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode'}</span>
-          </div>
-        </aside>
-      );
-    };
-
-    const App = () => {
-      const [page, setPage] = useState('introduction');
-      const [content, setContent] = useState('');
-      const [loading, setLoading] = useState(true);
-      const [theme, setTheme] = useState(() => {
-        const saved = localStorage.getItem('theme');
-        if (saved) return saved;
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      });
-
-      useEffect(() => {
-        document.documentElement.setAttribute('data-theme', theme);
-        localStorage.setItem('theme', theme);
-      }, [theme]);
-
-      const toggleTheme = () => {
-        setTheme(prev => prev === 'light' ? 'dark' : 'light');
-      };
-
-      useEffect(() => {
-        const handleHash = () => {
-          const hash = window.location.hash.replace('#', '');
-          if (hash) setPage(hash);
-        };
-        handleHash();
-        window.addEventListener('hashchange', handleHash);
-        return () => window.removeEventListener('hashchange', handleHash);
-      }, []);
-
-      useEffect(() => {
-        setLoading(true);
-        fetch(`./pages/${page}.md`)
-          .then(res => res.text())
-          .then(text => {
-            setContent(marked.parse(text));
-            setLoading(false);
-          })
-          .catch(err => {
-            setContent('<h1>Error</h1><p>Failed to load documentation page.</p>');
-            setLoading(false);
-          });
-      }, [page]);
-
-      return (
-        <div className="app-container">
-          <Sidebar 
-            currentPage={page} 
-            onPageChange={setPage} 
-            theme={theme} 
-            toggleTheme={toggleTheme} 
-          />
-          <main>
-            {loading ? (
-              <div className="loading">Loading...</div>
-            ) : (
-              <div dangerouslySetInnerHTML={{ __html: content }} />
-            )}
-            <footer>
-              <p>&copy; 2026 sapirrior. Released under the MIT License.</p>
-              <p>Repository: <a href="https://github.com/sapirrior/numlin">github.com/sapirrior/numlin</a></p>
-            </footer>
-          </main>
-        </div>
-      );
-    };
-
-    const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(<App />);
-  </script>
+    <footer>
+      <p>&copy; 2026 sapirrior. Released under the MIT License.</p>
+    </footer>
+  </main>
 </body>
 </html>
